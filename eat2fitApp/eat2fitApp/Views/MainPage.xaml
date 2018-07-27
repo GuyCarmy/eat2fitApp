@@ -6,11 +6,15 @@
 
     <StackLayout Spacing="20" Padding="20">
         <StackLayout Orientation="Horizontal">
-            <Button Text="My Diet"/>
-            <Button Text="My Eating Log"/>
+            <Button Text="My Diet" Command="{Binding MyDietClickedCommand}"/>
+            <Button Text="My Eating Log" Command="{Binding MyEatingLogClickedCommand}"/>
         </StackLayout>
-        <ListView >
-            
+        <ListView ItemsSource="{Binding MealList}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Details}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
         <Button Text="Add Meal"/>
     </StackLayout>

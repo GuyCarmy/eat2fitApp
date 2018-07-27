@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <ProjectReference Include="..\..\..\eat2fit\eat2fit\eat2fit.csproj" />
   </ItemGroup>
 
   <ItemGroup>

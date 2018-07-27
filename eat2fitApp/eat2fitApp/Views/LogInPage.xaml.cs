@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eat2fitApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace eat2fitApp.Views
 		public LogInPage ()
 		{
 			InitializeComponent ();
+			BindingContext = new LogInPageVM();
 		}
 	}
 }

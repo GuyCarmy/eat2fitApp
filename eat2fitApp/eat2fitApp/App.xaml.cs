@@ -1,3 +1,4 @@
+using eat2fitApp.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,7 +12,7 @@ namespace eat2fitApp
 		{
 			InitializeComponent();
 
-			MainPage = new NavigationPage(new MainPage());
+			MainPage = new NavigationPage(new LogInPage());
 		}
 
 		protected override void OnStart ()

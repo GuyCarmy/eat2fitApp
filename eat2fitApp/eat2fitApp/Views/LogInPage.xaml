@@ -4,9 +4,15 @@
              x:Class="eat2fitApp.Views.LogInPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Name: "/>
+                <Entry Text="{Binding Name}" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Password: "/>
+                <Entry Text="{Binding Password}" IsPassword="True" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <Button Text="Connect" Command="{Binding OnConnectClickedCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
