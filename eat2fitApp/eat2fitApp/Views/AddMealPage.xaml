@@ -10,18 +10,20 @@
                 <Label Text=":"/>
                 <Entry Text="{Binding Mins}" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
-            <Button Text="Add Food" HorizontalOptions="Fill" Command="{Binding AddFoodClickedCommand}"/>
+            <Picker Title="Select Food" ItemsSource="{Binding FoodList}" SelectedItem="{Binding SelectedFood}" ItemDisplayBinding="{Binding Name}"/>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Amount: "/>
                 <Entry Text="{Binding Amount}" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
-            <ListView ItemsSource="{Binding FoodList}">
+            <Button Text="Add Food" HorizontalOptions="Fill" Command="{Binding AddFoodClickedCommand}"/>
+            <ListView ItemsSource="{Binding MealFoodList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Name}" Detail="{Binding Details}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button Text="Finish Meal" Command="{Binding FinishMealClickedCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

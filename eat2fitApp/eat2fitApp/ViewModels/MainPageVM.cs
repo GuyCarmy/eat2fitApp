@@ -31,13 +31,13 @@ namespace eat2fitApp.ViewModels
 		}
 		
 		public Command MyDietClickedCommand { get; }
-		async void MyDietClicked()
+		void MyDietClicked()
 		{
 			MealList = new ObservableCollection<Meal>(customer.SuggestedDiet);
 		}
 
 		public Command MyEatingLogClickedCommand { get; }
-		async void MyEatingLogClicked()
+		void MyEatingLogClicked()
 		{
 			MealList = new ObservableCollection<Meal>(customer.EatedDiet);
 		}

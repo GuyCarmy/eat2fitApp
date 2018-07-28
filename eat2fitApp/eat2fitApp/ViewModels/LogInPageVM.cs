@@ -1,4 +1,5 @@
-﻿using eat2fit.Services;
+﻿using eat2fit.Models;
+using eat2fit.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,14 +9,17 @@ namespace eat2fitApp.ViewModels
 {
     public class LogInPageVM
     {
-		//todo: work on performance or add a splash screen. 
-		//maybe better to get all customers while the user is typing instead of getting the specific customer after he clicks connect.
-		// also getting all customers is not scalable.. need to think of other solution.
-		//also part of the problem might not be that. slow startup of the app during to non relevant things rujnning in the background
+		//todo: work on performance and add a splash screen. 
+		//for now it gets all customers while the user is typing instead of getting the specific customer after he clicks connect.
+		//getting all customers is not scalable and it also a security issue. need to think of other solution.
+		//also part of the problem might not be that. slow startup of the app during to non relevant things running in the background
 		bool isBusy = false;
 		public bool IsBusy { get => isBusy; set { isBusy = value; OnConnectClickedCommand.ChangeCanExecute(); } }
 		public string Name { get; set; }
 		public string Password { get; set; } //todo - encrypt passwords
+		MongoService mongoService;
+		List<Customer> Customers;
+
 
 		public Command OnConnectClickedCommand { get; }
 		async void OnConnectClicked()
@@ -29,8 +33,8 @@ namespace eat2fitApp.ViewModels
 			}
 			else
 			{
-				var mongoService = new MongoService();
-				var customer = await mongoService.GetCustomerIfPasswordVerified(Name, Password);
+				//var customer = await mongoService.GetCustomerIfPasswordVerified(Name, Password);
+				var customer = Customers.Find(x => x.Name == Name && x.Password== Password);
 				if (customer == null)
 				{
 					System.Diagnostics.Debug.WriteLine("login failed"); //todo make display alert
@@ -50,9 +54,18 @@ namespace eat2fitApp.ViewModels
 			}
 		}
 
+		async void GetAllCustomers()
+		{
+			mongoService = new MongoService();
+			Customers = await mongoService.GetAllCustomers();
+		}
+
 		public LogInPageVM()
 		{
 			OnConnectClickedCommand = new Command(OnConnectClicked,() => !isBusy);
+			GetAllCustomers();
+
+
 		}
-    }
+	}
 }
