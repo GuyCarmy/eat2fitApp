@@ -16,7 +16,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Text="Add Meal"/>
+        <Button Text="Add Meal" Command="{Binding AddMealClickedCommand}"/>
     </StackLayout>
 
 </ContentPage>

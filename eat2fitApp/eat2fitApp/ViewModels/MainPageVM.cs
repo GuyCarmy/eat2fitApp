@@ -1,4 +1,5 @@
 ﻿using eat2fit.Models;
+using eat2fitApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,7 +33,6 @@ namespace eat2fitApp.ViewModels
 		public Command MyDietClickedCommand { get; }
 		async void MyDietClicked()
 		{
-			System.Diagnostics.Debug.WriteLine("My Diet Clicked");
 			MealList = new ObservableCollection<Meal>(customer.SuggestedDiet);
 		}
 
@@ -42,10 +42,17 @@ namespace eat2fitApp.ViewModels
 			MealList = new ObservableCollection<Meal>(customer.EatedDiet);
 		}
 
+		public Command AddMealClickedCommand { get; }
+		async void AddMealClicked()
+		{
+			await Application.Current.MainPage.Navigation.PushAsync(new AddMealPage());
+		}
+
 		public MainPageVM()
 		{
 			MyDietClickedCommand = new Command(MyDietClicked);
 			MyEatingLogClickedCommand = new Command(MyEatingLogClicked);
+			AddMealClickedCommand = new Command(AddMealClicked);
 		}
 
 	}

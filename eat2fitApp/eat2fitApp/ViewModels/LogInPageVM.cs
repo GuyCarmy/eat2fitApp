@@ -8,6 +8,10 @@ namespace eat2fitApp.ViewModels
 {
     public class LogInPageVM
     {
+		//todo: work on performance or add a splash screen. 
+		//maybe better to get all customers while the user is typing instead of getting the specific customer after he clicks connect.
+		// also getting all customers is not scalable.. need to think of other solution.
+		//also part of the problem might not be that. slow startup of the app during to non relevant things rujnning in the background
 		bool isBusy = false;
 		public bool IsBusy { get => isBusy; set { isBusy = value; OnConnectClickedCommand.ChangeCanExecute(); } }
 		public string Name { get; set; }
@@ -38,7 +42,8 @@ namespace eat2fitApp.ViewModels
 					var vm = new MainPageVM();
 					vm.SetCustomer(customer);
 					mainPage.BindingContext = vm;
-					//todo: open the main page as maine page with a new navigation instance so there won't be a back (arrow) button
+					//todo: open the main page as main page with a new navigation instance so there won't be a back (arrow) button
+					// or make the MainPage a welcome page and the log in as a Modal
 					await Application.Current.MainPage.Navigation.PushAsync(mainPage);
 					IsBusy = false;
 				}
