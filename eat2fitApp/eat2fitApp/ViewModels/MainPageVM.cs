@@ -45,7 +45,11 @@ namespace eat2fitApp.ViewModels
 		public Command AddMealClickedCommand { get; }
 		async void AddMealClicked()
 		{
-			await Application.Current.MainPage.Navigation.PushAsync(new AddMealPage());
+			var p = new AddMealPage();
+			var vm = new AddMealPageVM();
+			vm.SetCustomer(customer);
+			p.BindingContext = vm;
+			await Application.Current.MainPage.Navigation.PushAsync(p);
 		}
 
 		public MainPageVM()

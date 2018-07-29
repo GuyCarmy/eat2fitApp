@@ -24,33 +24,39 @@ namespace eat2fitApp.ViewModels
 		public Command OnConnectClickedCommand { get; }
 		async void OnConnectClicked()
 		{
-			IsBusy = true;
-			System.Diagnostics.Debug.WriteLine("button clicked"); //todo delete
-			if (Name == null || Password == null)
+			try
 			{
-				System.Diagnostics.Debug.WriteLine("please enter all fields"); //todo make display alert
-				IsBusy = false;
-			}
-			else
-			{
-				//var customer = await mongoService.GetCustomerIfPasswordVerified(Name, Password);
-				var customer = Customers.Find(x => x.Name == Name && x.Password== Password);
-				if (customer == null)
+				IsBusy = true;
+				System.Diagnostics.Debug.WriteLine("button clicked"); //todo delete
+				if (Name == null || Password == null)
 				{
-					System.Diagnostics.Debug.WriteLine("login failed"); //todo make display alert
+					System.Diagnostics.Debug.WriteLine("please enter all fields"); //todo make display alert
 					IsBusy = false;
 				}
 				else
 				{
-					var mainPage = new MainPage();
-					var vm = new MainPageVM();
-					vm.SetCustomer(customer);
-					mainPage.BindingContext = vm;
-					//todo: open the main page as main page with a new navigation instance so there won't be a back (arrow) button
-					// or make the MainPage a welcome page and the log in as a Modal
-					await Application.Current.MainPage.Navigation.PushAsync(mainPage);
-					IsBusy = false;
+					//var customer = await mongoService.GetCustomerIfPasswordVerified(Name, Password);
+					var customer = Customers.Find(x => x.Name == Name && x.Password == Password);
+					if (customer == null)
+					{
+						System.Diagnostics.Debug.WriteLine("login failed"); //todo make display alert
+						IsBusy = false;
+					}
+					else
+					{
+						var mainPage = new MainPage();
+						var vm = new MainPageVM();
+						vm.SetCustomer(customer);
+						mainPage.BindingContext = vm;
+						//todo: open the main page as main page with a new navigation instance so there won't be a back (arrow) button
+						// or make the MainPage a welcome page and the log in as a Modal
+						await Application.Current.MainPage.Navigation.PushAsync(mainPage);
+						IsBusy = false;
+					}
 				}
+			}catch(Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(ex.Message);
 			}
 		}
 

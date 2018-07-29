@@ -19,7 +19,7 @@
             <ListView ItemsSource="{Binding MealFoodList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Name}" Detail="{Binding Details}"/>
+                        <TextCell Text="{Binding Name}" Detail="{Binding DetailsForMeal}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
