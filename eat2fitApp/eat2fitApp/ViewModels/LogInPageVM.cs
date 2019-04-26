@@ -16,7 +16,7 @@ namespace eat2fitApp.ViewModels
 		bool isBusy = false;
 		public bool IsBusy { get => isBusy; set { isBusy = value; OnConnectClickedCommand.ChangeCanExecute(); } }
 		public string Name { get; set; }
-		public string Password { get; set; } //todo - encrypt passwords
+		public string Password { get; set; } //todo - hash passwords
 		MongoService mongoService;
 		List<Customer> Customers;
 
